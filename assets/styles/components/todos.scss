@@ -1,0 +1,29 @@
+@import '../global/variables.scss';
+
+.todos__form {
+  margin-top: 50px;
+}
+
+.todos__list {
+  margin: 20px 0 0 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.todos__item {
+  width: 300px;
+  min-height: 44px;
+  border: 1px solid $beige200;
+  // border-radius: 10px;
+
+  @include font(normal, 16px, 44px);
+
+  @media (min-width: $desktop-md-width) {
+    width: 500px;
+    @include font(normal, 16px, 44px);
+  }
+
+  @media (min-width: $desktop-lg-width) {
+    @include font(normal, 20px, 44px);
+  }
+}

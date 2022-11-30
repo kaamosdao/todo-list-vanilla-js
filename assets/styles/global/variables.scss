@@ -1,0 +1,29 @@
+$font-family: 'Roboto', 'Arial', sans-serif;
+
+@mixin font(
+  $weight: normal,
+  $size: 14px,
+  $height: 24px,
+  $letter-spacing: normal
+) {
+  font-family: $font-family;
+  font-weight: $weight;
+  font-size: $size;
+  line-height: $height;
+  letter-spacing: $letter-spacing;
+}
+
+$white: #ffffff;
+$black: #1b1f2b;
+$orange200: #efa501;
+$orange100: #f8e6be;
+$green400: #286562;
+$green300: #3b7e7b;
+$grey300: #a6a6a6;
+$grey200: #d9dfdb;
+$beige200: #f4f0e9;
+$beige100: #f9f7f4;
+
+$desktop-lg-width: 1920px;
+$desktop-md-width: 1024px;
+$mobile-width: 360px;
