@@ -1,13 +1,15 @@
 const watcher = (state, cb) => {
   const watchedState = { ...state };
+  const internalState = {};
   Object.keys(watchedState).forEach((key) => {
-    const internalValue = watchedState[key];
+    internalState[key] = watchedState[key];
     Object.defineProperty(watchedState, key, {
       get() {
-        return internalValue;
+        return internalState[key];
       },
       set(newVal) {
         cb(key, newVal);
+        internalState[key] = newVal;
       },
     });
   });
