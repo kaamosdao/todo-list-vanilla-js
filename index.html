@@ -7,7 +7,6 @@
     <meta name="description" content="Todo List made via vanilla JS" />
     <meta name="keywords" content="todos" />
     <title>Todo List</title>
-    <link rel="stylesheet" href="src/css/style.min.css" />
     <link
       rel="preload"
       href="assets/fonts/roboto-regular.woff2"
@@ -21,20 +20,15 @@
       <h1 class="main__title">Todos</h1>
       <section class="todos">
         <h2 class="todos__title visually-hidden">Todo form</h2>
-        <form class="todos__form form">
-          <legend class="visually-hidden">Заполните поля</legend>
-            <label class="form__label visually-hidden" for="todo">
-              Todo
-            </label>
-            <input
-              class="form__input"
-              type="text"
-              name="todo"
-              id="todo"
-              placeholder="What needs to be done?"
-              required
-            />
-        </form>
+        <label class="form__label visually-hidden" for="todo"> Todo </label>
+        <input
+          class="todos__input input-add-todo"
+          type="text"
+          name="todo"
+          id="todo"
+          placeholder="What needs to be done?"
+          required
+        />
         <ul class="todos__list">
           <li class="todos__item">123123123123123</li>
         </ul>

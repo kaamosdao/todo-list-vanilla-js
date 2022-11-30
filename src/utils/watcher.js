@@ -1,4 +1,4 @@
-const watcher = (state, cb) => {
+const watcher = (state, callback) => {
   const watchedState = { ...state };
   const internalState = {};
   Object.keys(watchedState).forEach((key) => {
@@ -8,7 +8,7 @@ const watcher = (state, cb) => {
         return internalState[key];
       },
       set(newVal) {
-        cb(key, newVal);
+        callback(key, newVal);
         internalState[key] = newVal;
       },
     });
