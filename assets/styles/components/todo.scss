@@ -1,0 +1,72 @@
+@import '../global/variables.scss';
+
+.todo {
+  display: flex;
+  align-items: center;
+}
+
+.todo--completed {
+  color: $grey300;
+  text-decoration: line-through;
+}
+
+.todo:hover .todo__button-delete:after {
+  display: block;
+  color: $orange200;
+  transform: rotate(45deg);
+  content: '+';
+}
+
+.todo__title {
+  width: 100%;
+  padding: 10px 10px 10px 17px;
+  margin: 0;
+}
+
+.todo__button-delete {
+  width: 60px;
+  height: 40px;
+  margin: auto 0;
+  @include font(normal, 35px, 40px);
+  border: none;
+  background-color: transparent;
+}
+
+.todo .todo__button-delete:hover::after {
+  color: $orange300;
+}
+
+.todo__checkbox {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  margin-left: 10px;
+}
+
+.todo__checkbox-mark {
+  display: block;
+  width: 26px;
+  height: 26px;
+  margin: auto;
+  border: 1px solid $grey200;
+  border-radius: 50%;
+}
+
+.todo__input-check:checked + .todo__checkbox-mark:after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -6px;
+  margin-top: -4px;
+  width: 13px;
+  height: 10px;
+  background-image: url('/assets/img/check-mark.svg');
+  background-repeat: no-repeat;
+  content: '';
+}
+
+.todo__input-check:checked + .todo__checkbox-mark{
+  border: 1px solid $green300;
+}

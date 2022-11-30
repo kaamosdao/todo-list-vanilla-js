@@ -8,12 +8,15 @@ const addTodoHandler = (value, elements) => {
     liElement.dataset.id = String(todo.id);
 
     const inputCheckElement = document.createElement('input');
-    inputCheckElement.classList.add('todo__input-check');
+    inputCheckElement.classList.add('visually-hidden', 'todo__input-check');
     inputCheckElement.type = 'checkbox';
     inputCheckElement.setAttribute('id', String(todo.id));
     const labelElement = document.createElement('label');
-    labelElement.classList.add('visually-hidden');
-    labelElement.setAttribute('for', String(todo.id));
+    labelElement.classList.add('todo__checkbox');
+    labelElement.append(inputCheckElement);
+    const spanMarkElement = document.createElement('span');
+    spanMarkElement.classList.add('todo__checkbox-mark');
+    labelElement.append(spanMarkElement);
 
     const pElement = document.createElement('p');
     pElement.classList.add('todo__title');
@@ -24,7 +27,6 @@ const addTodoHandler = (value, elements) => {
     buttonElement.setAttribute('type', 'button');
     buttonElement.dataset.id = todo.id;
 
-    liElement.append(inputCheckElement);
     liElement.append(labelElement);
     liElement.append(pElement);
     liElement.append(buttonElement);
