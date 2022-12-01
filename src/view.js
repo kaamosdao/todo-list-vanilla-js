@@ -51,11 +51,32 @@ const addTodoHandler = (value, elements) => {
     buttonElement.setAttribute('type', 'button');
     buttonElement.dataset.id = todo.id;
 
-    liElement.append(labelElement);
-    liElement.append(pElement);
-    liElement.append(buttonElement);
+    const divElement = document.createElement('div');
+    divElement.classList.add('todo__container');
+
+    divElement.append(labelElement);
+    divElement.append(pElement);
+    divElement.append(buttonElement);
+    liElement.append(divElement);
     elements.todosList.append(liElement);
   });
+};
+
+const editTodoHandler = (value, elements) => {
+  if (!value) {
+    document.querySelector(`.todo--editing`).classList.remove('todo--editing');
+    document.querySelector(`.todo__input-editing`).remove();
+    return;
+  }
+
+  const inputElement = document.createElement('input');
+  inputElement.classList.add('todo__input-editing');
+  inputElement.setAttribute('type', 'text');
+  const liElement = document.querySelector(`.todo[data-id="${value}"]`);
+  inputElement.value = liElement.textContent;
+  liElement.append(inputElement);
+  liElement.classList.add('todo--editing');
+  inputElement.focus();
 };
 
 const watchedState = (state, elements) =>
@@ -67,6 +88,9 @@ const watchedState = (state, elements) =>
       case 'todos':
         addTodoHandler(value, elements);
         // console.log('todos', typeof value[0].id);
+        break;
+      case 'editedTodoId':
+        editTodoHandler(value, elements);
         break;
       default:
         break;

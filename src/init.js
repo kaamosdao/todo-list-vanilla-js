@@ -6,6 +6,7 @@ export default () => {
   const state = {
     filter: 'all', // all / active / completed
     todos: [],
+    editedTodoId: null,
   };
 
   const elements = {
@@ -74,5 +75,23 @@ export default () => {
     });
     watchedState.todos = newTodos;
     localstorageTodo.setData(watchedState);
+  });
+
+  document.addEventListener('click', (event) => {
+    const { editedTodoId } = watchedState;
+    if (event.target.classList.contains('todo__input-editing')) {
+      return;
+    }
+
+    if (editedTodoId) {
+      watchedState.editedTodoId = null;
+    }
+  });
+
+  elements.todosList.addEventListener('dblclick', (event) => {
+    if (event.target.classList.contains('todo__title')) {
+      const { id } = event.target.closest('.todo').dataset;
+      watchedState.editedTodoId = id;
+    }
   });
 };

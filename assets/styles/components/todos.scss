@@ -21,6 +21,10 @@
     padding: 18px 18px 18px 53px;
     @include font(normal, 20px, 141%);
   }
+
+  @media (min-width: $desktop-lg-width) {
+    width: 700px;
+  }
 }
 
 .todos__input::placeholder {
@@ -50,16 +54,20 @@
   min-height: 44px;
   border: 1px solid $beige200;
 
-  @include font(normal, 16px, 44px);
+  @include font(normal, 16px, 23px);
 
   @media (min-width: $desktop-md-width) {
     width: 500px;
-    @include font(normal, 16px, 44px);
+    @include font(normal, 16px, 23px);
   }
 
   @media (min-width: $desktop-lg-width) {
-    @include font(normal, 20px, 44px);
+    width: 700px;
   }
+}
+
+.todos__item:not(:last-child) {
+  border-bottom: none;
 }
 
 .todos__check-all {
