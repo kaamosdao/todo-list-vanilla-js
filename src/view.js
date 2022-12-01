@@ -64,6 +64,7 @@ const addTodoHandler = (value, elements) => {
 
 const editTodoHandler = (value, elements) => {
   if (!value) {
+    // console.log(value);
     document.querySelector(`.todo--editing`).classList.remove('todo--editing');
     document.querySelector(`.todo__input-editing`).remove();
     return;
@@ -87,7 +88,6 @@ const watchedState = (state, elements) =>
         break;
       case 'todos':
         addTodoHandler(value, elements);
-        // console.log('todos', typeof value[0].id);
         break;
       case 'editedTodoId':
         editTodoHandler(value, elements);
