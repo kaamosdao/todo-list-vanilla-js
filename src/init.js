@@ -83,8 +83,10 @@ export default () => {
   });
 
   elements.todosList.addEventListener('focusout', (event) => {
-    watchedState.editedTodoId = null;
-    localstorageTodo.setData(watchedState);
+    if (event.target.classList.contains('todo__input-editing')) {
+      watchedState.editedTodoId = null;
+      localstorageTodo.setData(watchedState);
+    }
   });
 
   elements.todosList.addEventListener('dblclick', (event) => {
