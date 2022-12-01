@@ -11,6 +11,7 @@ export default () => {
   const elements = {
     inputAddTodo: document.querySelector('.input-add-todo'),
     todosList: document.querySelector('.todos__list'),
+    buttonDeleteTodo: document.querySelector('.todo__button-delete'),
   };
 
   const localstorageTodo = new LocalStorageData('todosTestTask');
@@ -41,8 +42,6 @@ export default () => {
 
   elements.todosList.addEventListener('click', (event) => {
     if (event.target.classList.contains('todo__input-check')) {
-      // console.log(event.target.checked);
-      // console.log(event.target.id);
       const { id } = event.target;
       const isChecked = event.target.checked;
       const newTodos = [...watchedState.todos].map((todo) => {
@@ -54,7 +53,15 @@ export default () => {
       });
       watchedState.todos = newTodos;
       localstorageTodo.setData(watchedState);
-      // console.log('newTodos');
+    }
+  });
+
+  elements.todosList.addEventListener('click', (event) => {
+    if (event.target.classList.contains('todo__button-delete')) {
+      const { id } = event.target.dataset;
+      const newTodos = [...watchedState.todos].filter((todo) => Number(id) !== todo.id);
+      watchedState.todos = newTodos;
+      localstorageTodo.setData(watchedState);
     }
   });
 };
