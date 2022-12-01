@@ -2,6 +2,24 @@ import watcher from './utils/watcher';
 
 const addTodoHandler = (value, elements) => {
   elements.todosList.innerHTML = '';
+  const hasActiveTodo = value.filter((todo) => todo.status === 'active').length;
+  const hasTodos = value.length;
+  
+  const checkboxAllTodo = document.querySelector('.todos__check-all');
+
+  if (!hasTodos) {
+    checkboxAllTodo.classList.add('todos__check-all--hide');
+  } else {
+    checkboxAllTodo.classList.remove('todos__check-all--hide');
+  }
+  
+  const inputCheckAllTodo = document.querySelector('.todos__input-check');
+  if (!hasActiveTodo) {
+    inputCheckAllTodo.checked = true;
+  } else {
+    inputCheckAllTodo.checked = false;
+  }
+
   value.forEach((todo) => {
     const liElement = document.createElement('li');
     liElement.classList.add('todos__item', 'todo');

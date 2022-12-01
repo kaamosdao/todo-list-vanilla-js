@@ -10,6 +10,7 @@ export default () => {
 
   const elements = {
     inputAddTodo: document.querySelector('.input-add-todo'),
+    inputCheckAllTodo: document.querySelector('.todos__input-check'),
     todosList: document.querySelector('.todos__list'),
     buttonDeleteTodo: document.querySelector('.todo__button-delete'),
   };
@@ -22,7 +23,7 @@ export default () => {
     const { filter, todos } = localstorageTodo.getData();
     watchedState.filter = filter;
     watchedState.todos = todos;
-    console.log('init!')
+    console.log('init!');
   }
 
   elements.inputAddTodo.addEventListener('keyup', (event) => {
@@ -43,10 +44,10 @@ export default () => {
   elements.todosList.addEventListener('click', (event) => {
     if (event.target.classList.contains('todo__input-check')) {
       const { id } = event.target;
-      const isChecked = event.target.checked;
+      const { checked } = event.target;
       const newTodos = [...watchedState.todos].map((todo) => {
         if (Number(id) === todo.id) {
-          const newStatus = isChecked ? 'completed' : 'active';
+          const newStatus = checked ? 'completed' : 'active';
           return { ...todo, status: newStatus };
         }
         return todo;
@@ -63,5 +64,15 @@ export default () => {
       watchedState.todos = newTodos;
       localstorageTodo.setData(watchedState);
     }
+  });
+
+  elements.inputCheckAllTodo.addEventListener('click', (event) => {
+    const { checked } = event.target;
+    const newTodos = [...watchedState.todos].map((todo) => {
+      const newStatus = checked ? 'completed' : 'active';
+      return { ...todo, status: newStatus };
+    });
+    watchedState.todos = newTodos;
+    localstorageTodo.setData(watchedState);
   });
 };
