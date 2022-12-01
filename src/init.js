@@ -38,4 +38,23 @@ export default () => {
       event.target.value = '';
     }
   });
+
+  elements.todosList.addEventListener('click', (event) => {
+    if (event.target.classList.contains('todo__input-check')) {
+      // console.log(event.target.checked);
+      // console.log(event.target.id);
+      const { id } = event.target;
+      const isChecked = event.target.checked;
+      const newTodos = [...watchedState.todos].map((todo) => {
+        if (Number(id) === todo.id) {
+          const newStatus = isChecked ? 'completed' : 'active';
+          return { ...todo, status: newStatus };
+        }
+        return todo;
+      });
+      watchedState.todos = newTodos;
+      localstorageTodo.setData(watchedState);
+      // console.log('newTodos');
+    }
+  });
 };

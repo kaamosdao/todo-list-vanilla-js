@@ -11,6 +11,12 @@ const addTodoHandler = (value, elements) => {
     inputCheckElement.classList.add('visually-hidden', 'todo__input-check');
     inputCheckElement.type = 'checkbox';
     inputCheckElement.setAttribute('id', String(todo.id));
+
+    if (todo.status === 'completed') {
+      liElement.classList.add('todo--completed');
+      inputCheckElement.checked = true;
+    }
+
     const labelElement = document.createElement('label');
     labelElement.classList.add('todo__checkbox');
     labelElement.append(inputCheckElement);

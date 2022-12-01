@@ -5,7 +5,7 @@
   align-items: center;
 }
 
-.todo--completed {
+.todo--completed .todo__title {
   color: $grey300;
   text-decoration: line-through;
 }
