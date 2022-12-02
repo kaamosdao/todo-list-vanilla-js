@@ -1,5 +1,3 @@
-import watcher from './utils/watcher';
-
 const createTodoCheckElement = (todo) => {
   const inputCheckElement = document.createElement('input');
   inputCheckElement.classList.add('visually-hidden', 'todo__input-check');
@@ -121,7 +119,7 @@ const renderTodos = (todos, elements) => {
   renderTodoCounter(todos.items, elements);
 };
 
-const renderEditedTodo = (editedTodoId, elements) => {
+export const renderEditedTodo = (editedTodoId, elements) => {
   if (!editedTodoId) {
     elements.editingTodo().classList.remove('todo--editing');
     elements.editingInput().remove();
@@ -138,18 +136,4 @@ const renderEditedTodo = (editedTodoId, elements) => {
   inputElement.focus();
 };
 
-const watchedState = (state, elements) =>
-  watcher(state, (path, value) => {
-    switch (path) {
-      case 'todos':
-        renderTodos(value, elements);
-        break;
-      case 'editedTodoId':
-        renderEditedTodo(value, elements);
-        break;
-      default:
-        break;
-    }
-  });
-
-export default watchedState;
+export default renderTodos;
