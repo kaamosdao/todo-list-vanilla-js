@@ -22,6 +22,7 @@ export default () => {
     editingTodo: () => document.querySelector(`.todo--editing`),
     editingInput: () => document.querySelector(`.todo__input-editing`),
     spanTodoInfo: () => document.querySelector(`.todo-header__info`),
+    buttonClearCompleted: () => document.querySelector(`.todo-header__button-clear`),
   };
 
   const localstorageTodo = new LocalStorageData('todosTestTask');

@@ -74,19 +74,31 @@ const renderTodoCounter = (todos, elements) => {
   }
 };
 
+const renderAppearingElements = (todos, elements) => {
+  const hasTodos = todos.length;
+  const hasCompletedTodos = todos.find((todo) => todo.status === 'completed');
+  
+  if (hasTodos) {
+    elements.checkboxAllTodo().classList.remove('todos__check-all--hide');
+    elements.todoHeader().classList.remove('todo-header--hide');
+  } else {
+    elements.checkboxAllTodo().classList.add('todos__check-all--hide');
+    elements.todoHeader().classList.add('todo-header--hide');
+  }
+
+  if (hasCompletedTodos) {
+    elements.buttonClearCompleted().classList.remove('todo-header--hide');
+  } else {
+    elements.buttonClearCompleted().classList.add('todo-header--hide');
+  }
+};
+
 const renderTodos = (todos, elements) => {
   const filteredTodos = filterTodos(todos.items, todos.filter);
   elements.todosList().innerHTML = '';
   const hasActiveTodo = todos.items.find((todo) => todo.status === 'active');
-  const hasTodos = todos.items.length;
   
-  if (!hasTodos) {
-    elements.checkboxAllTodo().classList.add('todos__check-all--hide');
-    elements.todoHeader().classList.add('todo-header--hide');
-  } else {
-    elements.checkboxAllTodo().classList.remove('todos__check-all--hide');
-    elements.todoHeader().classList.remove('todo-header--hide');
-  }
+  renderAppearingElements(todos.items, elements);
   
   if (!hasActiveTodo) {
     elements.inputCheckAllTodo().checked = true;
