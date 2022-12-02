@@ -70,6 +70,10 @@
   border-radius: 50%;
 }
 
+.todo__checkbox:hover .todo__checkbox-mark {
+  border: 1px solid $grey300;
+}
+
 .todo__input-check:checked + .todo__checkbox-mark:after {
   position: absolute;
   top: 50%;

@@ -15,6 +15,10 @@ export default () => {
     todosList: document.querySelector('.todos__list'),
     buttonDeleteTodo: document.querySelector('.todo__button-delete'),
     filterList: document.querySelector('.todo-header__filter__list'),
+    checkboxAllTodo: document.querySelector('.todos__check-all'),
+    todoHeader: document.querySelector('.todo-header'),
+    editingTodo: document.querySelector(`.todo--editing`),
+    editingInput: document.querySelector(`.todo__input-editing`),
   };
 
   const localstorageTodo = new LocalStorageData('todosTestTask');
