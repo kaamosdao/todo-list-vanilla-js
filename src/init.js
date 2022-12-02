@@ -154,4 +154,13 @@ export default () => {
     };
     localstorageTodo.setData(watchedState.todos);
   });
+
+  elements.buttonClearCompleted().addEventListener('click', () => {
+    const activeTodos = watchedState.todos.items.filter((todo) => todo.status === 'active');
+    watchedState.todos = {
+      filter: watchedState.todos.filter,
+      items: activeTodos,
+    };
+    localstorageTodo.setData(watchedState.todos);
+  });
 };
