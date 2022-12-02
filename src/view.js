@@ -51,13 +51,6 @@ const createTodoElement = (todo) => {
   return liElement;
 };
 
-const filterTodos = (todos, filter) => {
-  if (filter === 'all') {
-    return todos;
-  }
-  return todos.filter((todo) => todo.status === filter);
-};
-
 const renderTodoCounter = (todos, elements) => {
   const spanElement = elements.spanTodoInfo();
   spanElement.innerHTML = '';
@@ -93,24 +86,38 @@ const renderAppearingElements = (todos, elements) => {
   }
 };
 
-const renderTodos = (todos, elements) => {
-  const filteredTodos = filterTodos(todos.items, todos.filter);
-  elements.todosList().innerHTML = '';
-  const hasActiveTodo = todos.items.find((todo) => todo.status === 'active');
-  
-  renderAppearingElements(todos.items, elements);
-  
+const renderInputCheckAllTodo =(todos, elements) => {
+  const hasActiveTodo = todos.find((todo) => todo.status === 'active');
+
   if (!hasActiveTodo) {
     elements.inputCheckAllTodo().checked = true;
   } else {
     elements.inputCheckAllTodo().checked = false;
   }
+}
 
+const filterTodos = (todos, filter) => {
+  if (filter === 'all') {
+    return todos;
+  }
+  return todos.filter((todo) => todo.status === filter);
+};
+
+const renderEachTodo =(todos, filter, elements) => {
+  const filteredTodos = filterTodos(todos, filter);
+  
   filteredTodos.forEach((todo) => {
     const todoElement = createTodoElement(todo);
     elements.todosList().append(todoElement);
   });
+}
 
+const renderTodos = (todos, elements) => {
+  elements.todosList().innerHTML = '';
+
+  renderAppearingElements(todos.items, elements);
+  renderInputCheckAllTodo(todos.items, elements);
+  renderEachTodo(todos.items, todos.filter, elements);
   renderTodoCounter(todos.items, elements);
 };
 
