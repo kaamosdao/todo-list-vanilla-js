@@ -12,6 +12,10 @@
   }
 }
 
+.todo-header--hide {
+  display: none;
+}
+
 .todo-header__info {
   margin-left: 10px;
   @media (min-width: $desktop-md-width) {

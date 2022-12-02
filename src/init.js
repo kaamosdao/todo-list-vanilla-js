@@ -14,6 +14,7 @@ export default () => {
     inputCheckAllTodo: document.querySelector('.todos__input-check'),
     todosList: document.querySelector('.todos__list'),
     buttonDeleteTodo: document.querySelector('.todo__button-delete'),
+    filterList: document.querySelector('.todo-header__filter__list'),
   };
 
   const localstorageTodo = new LocalStorageData('todosTestTask');
@@ -112,5 +113,10 @@ export default () => {
       watchedState.todos = newTodos;
       localstorageTodo.setData(watchedState);
     }
+  });
+
+  elements.filterList.addEventListener('change', (event) => {
+    watchedState.filter = event.target.value;
+    localstorageTodo.setData(watchedState);
   });
 };

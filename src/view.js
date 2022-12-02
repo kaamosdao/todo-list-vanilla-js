@@ -6,11 +6,14 @@ const addTodoHandler = (value, elements) => {
   const hasTodos = value.length;
   
   const checkboxAllTodo = document.querySelector('.todos__check-all');
+  const todoHeader = document.querySelector('.todo-header');
 
   if (!hasTodos) {
     checkboxAllTodo.classList.add('todos__check-all--hide');
+    todoHeader.classList.add('todo-header--hide');
   } else {
     checkboxAllTodo.classList.remove('todos__check-all--hide');
+    todoHeader.classList.remove('todo-header--hide');
   }
   
   const inputCheckAllTodo = document.querySelector('.todos__input-check');
@@ -79,11 +82,15 @@ const editTodoHandler = (value, elements) => {
   inputElement.focus();
 };
 
+const filterHandler = (value, elements) => {
+
+};
+
 const watchedState = (state, elements) =>
   watcher(state, (path, value) => {
     switch (path) {
       case 'filter':
-        // filterHandler(value, elements, i18next);
+        filterHandler(value, elements);
         break;
       case 'todos':
         addTodoHandler(value, elements);
