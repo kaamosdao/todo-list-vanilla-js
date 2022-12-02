@@ -51,35 +51,43 @@ const createTodoElement = (todo) => {
   return liElement;
 };
 
-const addTodoHandler = (todos, elements) => {
-  elements.todosList.innerHTML = '';
-  const hasActiveTodo = todos.filter((todo) => todo.status === 'active').length;
-  const hasTodos = todos.length;
+const filterTodos = (todos, filter) => {
+  if (filter === 'all') {
+    return todos;
+  }
+  return todos.filter((todo) => todo.status === filter);
+};
+
+const renderTodos = (todos, elements) => {
+  const filteredTodos = filterTodos(todos.items, todos.filter);
+  elements.todosList().innerHTML = '';
+  const hasActiveTodo = todos.items.find((todo) => todo.status === 'active');
+  const hasTodos = todos.items.length;
   
   if (!hasTodos) {
-    elements.checkboxAllTodo.classList.add('todos__check-all--hide');
-    elements.todoHeader.classList.add('todo-header--hide');
+    elements.checkboxAllTodo().classList.add('todos__check-all--hide');
+    elements.todoHeader().classList.add('todo-header--hide');
   } else {
-    elements.checkboxAllTodo.classList.remove('todos__check-all--hide');
-    elements.todoHeader.classList.remove('todo-header--hide');
+    elements.checkboxAllTodo().classList.remove('todos__check-all--hide');
+    elements.todoHeader().classList.remove('todo-header--hide');
   }
   
   if (!hasActiveTodo) {
-    elements.inputCheckAllTodo.checked = true;
+    elements.inputCheckAllTodo().checked = true;
   } else {
-    elements.inputCheckAllTodo.checked = false;
+    elements.inputCheckAllTodo().checked = false;
   }
 
-  todos.forEach((todo) => {
+  filteredTodos.forEach((todo) => {
     const todoElement = createTodoElement(todo);
-    elements.todosList.append(todoElement);
+    elements.todosList().append(todoElement);
   });
 };
 
-const editTodoHandler = (editedTodoId, elements) => {
+const renderEditedTodo = (editedTodoId, elements) => {
   if (!editedTodoId) {
-    elements.editingTodo.classList.remove('todo--editing');
-    elements.editingInput.remove();
+    elements.editingTodo().classList.remove('todo--editing');
+    elements.editingInput().remove();
     return;
   }
 
@@ -93,21 +101,14 @@ const editTodoHandler = (editedTodoId, elements) => {
   inputElement.focus();
 };
 
-const filterHandler = (value, todos, elements) => {
-
-};
-
 const watchedState = (state, elements) =>
   watcher(state, (path, value) => {
     switch (path) {
       case 'todos':
-        addTodoHandler(value, elements);
+        renderTodos(value, elements);
         break;
       case 'editedTodoId':
-        editTodoHandler(value, elements);
-        break;
-      case 'filter':
-        filterHandler(value, state.todos, elements);
+        renderEditedTodo(value, elements);
         break;
       default:
         break;
