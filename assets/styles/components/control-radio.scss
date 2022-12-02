@@ -1,0 +1,28 @@
+@import '../global/variables.scss';
+
+.control-radio {
+  position: relative;
+}
+
+.control-radio__label {
+  display: block;
+  box-sizing: border-box;
+  padding: 2px 5px;
+  
+  border-radius: 2px;
+  @media (min-width: $desktop-md-width) {
+  }
+}
+
+.control-radio:hover .control-radio__label {
+  outline: 1px solid $orange200;
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+.control-radio__input:checked + .control-radio__label {
+  outline: 1px solid $orange300;
+  @media (min-width: $desktop-md-width) {
+
+  }
+}

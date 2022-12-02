@@ -20,6 +20,46 @@
       <h1 class="main__title">Todos</h1>
       <section class="todos">
         <h2 class="todos__title visually-hidden">Todo form</h2>
+        <header class="todos__header todo-header">
+          <h3 class="visually-hidden">Todo information and filter</h3>
+          <span class="todo-header__info"><strong class="todo-header__count">3</strong> items left</span>
+          <ul class="todo-header__filter__list">
+            <li class="todo-header__filter-item">
+              <label class="control-radio">
+                <input
+                  class="visually-hidden control-radio__input"
+                  type="radio"
+                  name="filter"
+                  value="all"
+                  checked
+                />
+                <span class="control-radio__label">All</span>
+              </label>
+            </li>
+            <li class="todo-header__filter-item">
+              <label class="control-radio">
+                <input
+                  class="visually-hidden control-radio__input"
+                  type="radio"
+                  name="filter"
+                  value="active"
+                />
+                <span class="control-radio__label">Active</span>
+              </label>
+            </li>
+            <li class="todo-header__filter-item">
+              <label class="control-radio">
+                <input
+                  class="visually-hidden control-radio__input"
+                  type="radio"
+                  name="filter"
+                  value="completed"
+                />
+                <span class="control-radio__label">Completed</span>
+              </label>
+            </li>
+          </ul>
+        </header>
         <label class="todos__check-all">
           <input class="visually-hidden todos__input-check" type="checkbox" id="all">
           <span class="todos__checkbox-mark"></span>

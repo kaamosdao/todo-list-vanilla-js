@@ -24,7 +24,6 @@ export default () => {
     const { filter, todos } = localstorageTodo.getData();
     watchedState.filter = filter;
     watchedState.todos = todos;
-    console.log('init!');
   }
 
   elements.inputAddTodo.addEventListener('keyup', (event) => {

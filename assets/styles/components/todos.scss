@@ -108,3 +108,9 @@
 .todos__input-check:checked + .todos__checkbox-mark:after {
   color: $grey300;
 }
+
+
+.todos__header {
+  position: absolute;
+  top: 0;
+}

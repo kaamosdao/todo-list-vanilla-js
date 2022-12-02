@@ -1,0 +1,39 @@
+@import '../global/variables.scss';
+
+.todo-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  @include font(normal, 13px, 13px);
+  color: $grey400;
+
+  @media (min-width: $desktop-md-width) {
+    @include font(normal, 15px, 15px);
+  }
+}
+
+.todo-header__info {
+  margin-left: 10px;
+  @media (min-width: $desktop-md-width) {
+    margin-left: 20px;
+  }
+}
+
+.todo-header__filter__list {
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  gap: 10px;
+  margin-left: 42px;
+  padding: 0;
+  list-style-type: none;
+
+  @media (min-width: $desktop-md-width) {
+    gap: 20px;
+    margin-left: 56px;
+  }
+
+  @media (min-width: $desktop-lg-width) {
+    gap: 20px;
+    margin-left: 161px;
+  }
+}
