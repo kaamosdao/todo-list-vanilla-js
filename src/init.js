@@ -21,6 +21,7 @@ export default () => {
     todoHeader: () => document.querySelector('.todo-header'),
     editingTodo: () => document.querySelector(`.todo--editing`),
     editingInput: () => document.querySelector(`.todo__input-editing`),
+    spanTodoInfo: () => document.querySelector(`.todo-header__info`),
   };
 
   const localstorageTodo = new LocalStorageData('todosTestTask');

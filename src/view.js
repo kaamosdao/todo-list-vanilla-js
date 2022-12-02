@@ -58,6 +58,22 @@ const filterTodos = (todos, filter) => {
   return todos.filter((todo) => todo.status === filter);
 };
 
+const renderTodoCounter = (todos, elements) => {
+  const spanElement = elements.spanTodoInfo();
+  spanElement.innerHTML = '';
+  const activeTodosCount = todos.filter((todo) => todo.status === 'active').length;
+  const strongElement = document.createElement('strong');
+  strongElement.classList.add('todo-header__count');
+  strongElement.textContent = activeTodosCount;
+  spanElement.append(strongElement);
+
+  if (activeTodosCount === 1) {
+    spanElement.append(' item left');
+  } else {
+    spanElement.append(' items left');
+  }
+};
+
 const renderTodos = (todos, elements) => {
   const filteredTodos = filterTodos(todos.items, todos.filter);
   elements.todosList().innerHTML = '';
@@ -82,6 +98,8 @@ const renderTodos = (todos, elements) => {
     const todoElement = createTodoElement(todo);
     elements.todosList().append(todoElement);
   });
+
+  renderTodoCounter(todos.items, elements);
 };
 
 const renderEditedTodo = (editedTodoId, elements) => {
