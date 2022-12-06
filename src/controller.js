@@ -4,6 +4,9 @@ export default (model, elements, localStorageHandler) => {
   elements.inputAddTodo().addEventListener('keyup', (event) => {
     event.preventDefault();
     if (event.keyCode === 13) {
+      if (!event.target.value) {
+        return;
+      }
       const newTodo = {
         title: event.target.value,
         status: 'active',
@@ -105,9 +108,10 @@ export default (model, elements, localStorageHandler) => {
         }
         return acc;
       }, []);
+      const clearedTodos = newTodos.filter((todo) => todo.title);
       model.todos = {
         filter: model.todos.filter,
-        items: newTodos,
+        items: clearedTodos,
       };
       localStorageHandler.setData(model.todos);
     }
