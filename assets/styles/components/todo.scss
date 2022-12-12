@@ -10,13 +10,6 @@
   text-decoration: line-through;
 }
 
-.todo:hover .todo__button-delete:after {
-  display: block;
-  color: $orange200;
-  transform: rotate(45deg);
-  content: '+';
-}
-
 .todo--editing .todo__container{
   display: none;
 }
@@ -28,24 +21,36 @@
 }
 
 .todo__title {
-  max-width: 207px;
-  width: 100%;
+  flex-grow: 1;
   padding: 10px 0 10px 17px;
   margin: 0;
-  word-wrap: break-word;
-
-  @media (min-width: $desktop-md-width) {
-    max-width: 407px;
-  }
+  word-break: break-all;
 }
 
 .todo__button-delete {
-  width: 40px;
-  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
   margin: auto 0;
   @include font(normal, 35px, 40px);
   border: none;
   background-color: transparent;
+}
+
+.todo__button-delete:after {
+  display: block;
+  color: $orange200;
+  transform: rotate(45deg);
+  content: '+';
+
+  @media (min-width: $tablet-width) {
+    display: none;
+  }
+}
+
+.todo:hover .todo__button-delete:after {
+  @media (min-width: $tablet-width) {
+    display: block;
+  }
 }
 
 .todo .todo__button-delete:hover::after {

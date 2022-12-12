@@ -9,7 +9,7 @@
   @include font(normal, 12px, 12px);
   color: $grey400;
 
-  @media (min-width: $desktop-md-width) {
+  @media (min-width: $tablet-lg-width) {
     margin-top: 15px;
     @include font(normal, 14px, 14px);
   }
@@ -17,7 +17,7 @@
 
 .todo-header__info {
   margin-left: 10px;
-  @media (min-width: $desktop-md-width) {
+  @media (min-width: $tablet-lg-width) {
     margin-left: 20px;
   }
 }
@@ -30,7 +30,14 @@
   padding: 0;
   list-style-type: none;
 
-  @media (min-width: $desktop-md-width) {
+  @media (min-width: $tablet-width) {
+    position: absolute;
+    left: 50%;
+    gap: 10px;
+    margin: 0 0 0 -78px;
+  }
+
+  @media (min-width: $tablet-lg-width) {
     position: absolute;
     left: 50%;
     gap: 20px;
@@ -52,7 +59,12 @@
   border: none;
   background-color: transparent;
 
-  @media (min-width: $desktop-md-width) {
+  @media (min-width: $tablet-width) {
+    position: static;
+    margin-right: 20px;
+  }
+
+  @media (min-width: $tablet-lg-width) {
     position: static;
     margin-right: 20px;
     @include font(normal, 14px, 12px);
