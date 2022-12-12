@@ -22,6 +22,27 @@ export default (model, elements, localStorageHandler) => {
     }
   });
 
+  document.addEventListener('click', (event) => {
+    if (event.target.classList.contains('input-add-todo')) {
+      return;
+    }
+    if (!elements.inputAddTodo().value) {
+      return;
+    }
+    const newTodo = {
+      title: elements.inputAddTodo().value,
+      status: 'active',
+      id: getId(),
+    };
+    const newTodos = [...model.todos.items, newTodo];
+    model.todos = {
+      filter: model.todos.filter,
+      items: newTodos,
+    };
+    localStorageHandler.setData(model.todos);
+    elements.inputAddTodo().value = '';
+  });
+
   elements.todosList().addEventListener('click', (event) => {
     if (event.target.classList.contains('todo__input-check')) {
       const { id } = event.target;
@@ -45,6 +66,9 @@ export default (model, elements, localStorageHandler) => {
   });
 
   elements.todosList().addEventListener('click', (event) => {
+    if (elements.inputAddTodo().value) {
+      return;
+    }
     if (event.target.classList.contains('todo__button-delete')) {
       const { id } = event.target.dataset;
       const newTodos = model.todos.items.filter(
@@ -127,7 +151,13 @@ export default (model, elements, localStorageHandler) => {
   });
 
   elements.buttonClearCompleted().addEventListener('click', () => {
-    const activeTodos = model.todos.items.filter((todo) => todo.status === 'active');
+    if (elements.inputAddTodo().value) {
+      console.log('ere');
+      return;
+    }
+    const activeTodos = model.todos.items.filter(
+      (todo) => todo.status === 'active'
+    );
     model.todos = {
       filter: model.todos.filter,
       items: activeTodos,
