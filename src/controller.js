@@ -141,18 +141,22 @@ export default (model, elements, localStorageHandler) => {
     }
   });
 
-  elements.filterList().addEventListener('change', (event) => {
-    const filter = event.target.value;
-    model.todos = {
-      filter,
-      items: model.todos.items,
-    };
-    localStorageHandler.setData(model.todos);
+  elements.filterButtons().forEach((button) => {
+    button.addEventListener('click', (event) => {
+      if (elements.inputAddTodo().value) {
+        return;
+      }
+      const filter = event.target.name;
+      model.todos = {
+        filter,
+        items: model.todos.items,
+      };
+      localStorageHandler.setData(model.todos);
+    });
   });
 
   elements.buttonClearCompleted().addEventListener('click', () => {
     if (elements.inputAddTodo().value) {
-      console.log('ere');
       return;
     }
     const activeTodos = model.todos.items.filter(

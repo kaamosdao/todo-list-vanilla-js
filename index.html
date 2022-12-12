@@ -25,38 +25,13 @@
           <span class="todo-header__info"></span>
           <ul class="todo-header__filter__list">
             <li class="todo-header__filter-item">
-              <label class="control-radio">
-                <input
-                  class="visually-hidden control-radio__input"
-                  type="radio"
-                  name="filter"
-                  value="all"
-                  checked
-                />
-                <span class="control-radio__label">All</span>
-              </label>
+              <button class="button-filter button-filter--selected" type="button" name="all">All</button>
             </li>
             <li class="todo-header__filter-item">
-              <label class="control-radio">
-                <input
-                  class="visually-hidden control-radio__input"
-                  type="radio"
-                  name="filter"
-                  value="active"
-                />
-                <span class="control-radio__label">Active</span>
-              </label>
+              <button class="button-filter" type="button" name="active">Active</button>
             </li>
             <li class="todo-header__filter-item">
-              <label class="control-radio">
-                <input
-                  class="visually-hidden control-radio__input"
-                  type="radio"
-                  name="filter"
-                  value="completed"
-                />
-                <span class="control-radio__label">Completed</span>
-              </label>
+              <button class="button-filter" type="button" name="completed">Completed</button>
             </li>
           </ul>
           <button class="todo-header__button-clear todo-header--hide" type="button">

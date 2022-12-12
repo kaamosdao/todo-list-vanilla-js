@@ -1,0 +1,33 @@
+@import '../global/variables.scss';
+
+.button-filter {
+  display: block;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 2px 5px;
+  @include font(normal, 12px, 12px);
+  color: $grey400;
+  border: none;
+  background: none;
+  border-radius: 2px;
+
+  @media (min-width: $tablet-lg-width) {
+    @include font(normal, 14px, 14px);
+  }
+}
+
+.button-filter:hover {
+  outline: 1px solid $orange200;
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+.button-filter--selected {
+  outline: 1px solid $orange300;
+}
+
+.button-filter--selected:hover {
+  outline: 1px solid $orange300;
+  opacity: 1;
+  cursor: default;
+}

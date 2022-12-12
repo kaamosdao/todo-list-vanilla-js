@@ -52,7 +52,9 @@ const createTodoElement = (todo) => {
 const renderTodoCounter = (todos, elements) => {
   const spanElement = elements.spanTodoInfo();
   spanElement.innerHTML = '';
-  const activeTodosCount = todos.filter((todo) => todo.status === 'active').length;
+  const activeTodosCount = todos.filter(
+    (todo) => todo.status === 'active'
+  ).length;
   const strongElement = document.createElement('strong');
   strongElement.classList.add('todo-header__count');
   strongElement.textContent = activeTodosCount;
@@ -68,7 +70,7 @@ const renderTodoCounter = (todos, elements) => {
 const renderAppearingElements = (todos, elements) => {
   const hasTodos = todos.length;
   const hasCompletedTodos = todos.find((todo) => todo.status === 'completed');
-  
+
   if (hasTodos) {
     elements.checkboxAllTodo().classList.remove('todos__check-all--hide');
     elements.todoHeader().classList.remove('todo-header--hide');
@@ -84,7 +86,7 @@ const renderAppearingElements = (todos, elements) => {
   }
 };
 
-const renderInputCheckAllTodo =(todos, elements) => {
+const renderInputCheckAllTodo = (todos, elements) => {
   const hasActiveTodo = todos.find((todo) => todo.status === 'active');
 
   if (!hasActiveTodo) {
@@ -92,7 +94,7 @@ const renderInputCheckAllTodo =(todos, elements) => {
   } else {
     elements.inputCheckAllTodo().checked = false;
   }
-}
+};
 
 const filterTodos = (todos, filter) => {
   if (filter === 'all') {
@@ -101,14 +103,24 @@ const filterTodos = (todos, filter) => {
   return todos.filter((todo) => todo.status === filter);
 };
 
-const renderEachTodo =(todos, filter, elements) => {
+const renderEachTodo = (todos, filter, elements) => {
   const filteredTodos = filterTodos(todos, filter);
-  
+
   filteredTodos.forEach((todo) => {
     const todoElement = createTodoElement(todo);
     elements.todosList().append(todoElement);
   });
-}
+};
+
+const renderFilterView = (filter, elements) => {
+  elements.filterButtons().forEach((button) => {
+    if (button.name === filter) {
+      button.classList.add('button-filter--selected');
+    } else {
+      button.classList.remove('button-filter--selected');
+    }
+  });
+};
 
 const renderTodos = (todos, elements) => {
   elements.todosList().innerHTML = '';
@@ -116,6 +128,7 @@ const renderTodos = (todos, elements) => {
   renderAppearingElements(todos.items, elements);
   renderInputCheckAllTodo(todos.items, elements);
   renderEachTodo(todos.items, todos.filter, elements);
+  renderFilterView(todos.filter, elements);
   renderTodoCounter(todos.items, elements);
 };
 
