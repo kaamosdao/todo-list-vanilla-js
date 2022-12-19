@@ -35,4 +35,6 @@ export default () => {
   }
 
   setControllers(model, elements, localStorageTodo);
+
+  elements.inputAddTodo().focus();
 };
