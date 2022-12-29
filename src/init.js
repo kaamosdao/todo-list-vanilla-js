@@ -17,12 +17,9 @@ export default () => {
     todosList: document.querySelector('.todos__list'),
     filterButtons: document.querySelectorAll('.button-filter'),
     buttonClearCompleted: document.querySelector(`.todo-header__button-clear`),
-    buttonDeleteTodo: () => document.querySelector('.todo__button-delete'),
-    checkboxAllTodo: () => document.querySelector('.todos__check-all'),
-    todoHeader: () => document.querySelector('.todo-header'),
-    editingTodo: () => document.querySelector(`.todo--editing`),
-    editingInput: () => document.querySelector(`.todo__input-editing`),
-    spanTodoInfo: () => document.querySelector(`.todo-header__info`),
+    checkboxAllTodo: document.querySelector('.todos__check-all'),
+    todoHeader: document.querySelector('.todo-header'),
+    spanTodoInfo: document.querySelector(`.todo-header__info`),
   };
 
   const localStorageTodo = new LocalStorageData('todosTestTask');

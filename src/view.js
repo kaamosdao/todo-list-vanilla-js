@@ -50,7 +50,7 @@ const createTodoElement = (todo) => {
 };
 
 const renderTodoCounter = (todos, elements) => {
-  const todosCounterInfo = elements.spanTodoInfo();
+  const todosCounterInfo = elements.spanTodoInfo;
   todosCounterInfo.innerHTML = '';
   const activeTodosCount = todos.filter((todo) => todo.status === 'active').length;
   const todosCountElement = document.createElement('strong');
@@ -70,11 +70,11 @@ const renderAppearingElements = (todos, elements) => {
   const hasCompletedTodos = todos.find((todo) => todo.status === 'completed');
 
   if (hasTodos) {
-    elements.checkboxAllTodo().classList.remove('todos__check-all--hide');
-    elements.todoHeader().classList.remove('todo-header--hide');
+    elements.checkboxAllTodo.classList.remove('todos__check-all--hide');
+    elements.todoHeader.classList.remove('todo-header--hide');
   } else {
-    elements.checkboxAllTodo().classList.add('todos__check-all--hide');
-    elements.todoHeader().classList.add('todo-header--hide');
+    elements.checkboxAllTodo.classList.add('todos__check-all--hide');
+    elements.todoHeader.classList.add('todo-header--hide');
   }
 
   if (hasCompletedTodos) {
@@ -130,10 +130,12 @@ const renderTodos = (todos, elements) => {
   renderTodoCounter(todos.items, elements);
 };
 
-export const renderEditedTodo = (editedTodoId, elements) => {
+export const renderEditedTodo = (editedTodoId) => {
   if (!editedTodoId) {
-    elements.editingTodo().classList.remove('todo--editing');
-    elements.editingInput().remove();
+    const editingTodo = document.querySelector(`.todo--editing`);
+    const editingInput = document.querySelector(`.todo__input-editing`);
+    editingTodo.classList.remove('todo--editing');
+    editingInput.remove();
     return;
   }
 

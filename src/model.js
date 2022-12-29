@@ -8,7 +8,7 @@ export default (state, elements) =>
         renderTodos(value, elements);
         break;
       case 'editedTodoId':
-        renderEditedTodo(value, elements);
+        renderEditedTodo(value);
         break;
       default:
         break;
