@@ -1,7 +1,7 @@
 import getId from './utils/getId.js';
 
 export default (model, elements, localStorageHandler) => {
-  elements.inputAddTodo().addEventListener('keyup', (event) => {
+  elements.inputAddTodo.addEventListener('keyup', (event) => {
     event.preventDefault();
     if (event.keyCode === 13) {
       if (!event.target.value) {
@@ -26,11 +26,11 @@ export default (model, elements, localStorageHandler) => {
     if (event.target.classList.contains('input-add-todo')) {
       return;
     }
-    if (!elements.inputAddTodo().value) {
+    if (!elements.inputAddTodo.value) {
       return;
     }
     const newTodo = {
-      title: elements.inputAddTodo().value,
+      title: elements.inputAddTodo.value,
       status: 'active',
       id: getId(),
     };
@@ -40,10 +40,10 @@ export default (model, elements, localStorageHandler) => {
       items: newTodos,
     };
     localStorageHandler.setData(model.todos);
-    elements.inputAddTodo().value = '';
+    elements.inputAddTodo.value = '';
   });
 
-  elements.todosList().addEventListener('click', (event) => {
+  elements.todosList.addEventListener('click', (event) => {
     if (event.target.classList.contains('todo__input-check')) {
       const { id } = event.target;
       const { checked } = event.target;
@@ -65,8 +65,8 @@ export default (model, elements, localStorageHandler) => {
     }
   });
 
-  elements.todosList().addEventListener('click', (event) => {
-    if (elements.inputAddTodo().value) {
+  elements.todosList.addEventListener('click', (event) => {
+    if (elements.inputAddTodo.value) {
       return;
     }
     if (event.target.classList.contains('todo__button-delete')) {
@@ -82,7 +82,7 @@ export default (model, elements, localStorageHandler) => {
     }
   });
 
-  elements.inputCheckAllTodo().addEventListener('click', (event) => {
+  elements.inputCheckAllTodo.addEventListener('click', (event) => {
     const { checked } = event.target;
     const newTodos = model.todos.items.map((todo) => {
       const newStatus = checked ? 'completed' : 'active';
@@ -95,7 +95,7 @@ export default (model, elements, localStorageHandler) => {
     localStorageHandler.setData(model.todos);
   });
 
-  elements.todosList().addEventListener('dblclick', (event) => {
+  elements.todosList.addEventListener('dblclick', (event) => {
     if (event.target.classList.contains('todo__title')) {
       const { id } = event.target.closest('.todo').dataset;
       model.editedTodoId = id;
@@ -103,14 +103,14 @@ export default (model, elements, localStorageHandler) => {
     localStorageHandler.setData(model.todos);
   });
 
-  elements.todosList().addEventListener('focusout', (event) => {
+  elements.todosList.addEventListener('focusout', (event) => {
     if (event.target.classList.contains('todo__input-editing')) {
       model.editedTodoId = null;
       localStorageHandler.setData(model.todos);
     }
   });
 
-  elements.todosList().addEventListener('keyup', (event) => {
+  elements.todosList.addEventListener('keyup', (event) => {
     event.preventDefault();
     if (event.keyCode === 13) {
       if (event.target.classList.contains('todo__input-editing')) {
@@ -120,7 +120,7 @@ export default (model, elements, localStorageHandler) => {
     }
   });
 
-  elements.todosList().addEventListener('change', (event) => {
+  elements.todosList.addEventListener('change', (event) => {
     if (event.target.classList.contains('todo__input-editing')) {
       const { id } = event.target.closest('.todo').dataset;
       const newTodos = model.todos.items.reduce((acc, todo) => {
@@ -141,9 +141,9 @@ export default (model, elements, localStorageHandler) => {
     }
   });
 
-  elements.filterButtons().forEach((button) => {
+  elements.filterButtons.forEach((button) => {
     button.addEventListener('click', (event) => {
-      if (elements.inputAddTodo().value) {
+      if (elements.inputAddTodo.value) {
         return;
       }
       const filter = event.target.name;
@@ -155,8 +155,8 @@ export default (model, elements, localStorageHandler) => {
     });
   });
 
-  elements.buttonClearCompleted().addEventListener('click', () => {
-    if (elements.inputAddTodo().value) {
+  elements.buttonClearCompleted.addEventListener('click', () => {
+    if (elements.inputAddTodo.value) {
       return;
     }
     const activeTodos = model.todos.items.filter(

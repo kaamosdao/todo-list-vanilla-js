@@ -80,9 +80,9 @@ const renderAppearingElements = (todos, elements) => {
   }
 
   if (hasCompletedTodos) {
-    elements.buttonClearCompleted().classList.remove('todo-header--hide');
+    elements.buttonClearCompleted.classList.remove('todo-header--hide');
   } else {
-    elements.buttonClearCompleted().classList.add('todo-header--hide');
+    elements.buttonClearCompleted.classList.add('todo-header--hide');
   }
 };
 
@@ -90,9 +90,9 @@ const renderInputCheckAllTodo = (todos, elements) => {
   const hasActiveTodo = todos.find((todo) => todo.status === 'active');
 
   if (!hasActiveTodo) {
-    elements.inputCheckAllTodo().checked = true;
+    elements.inputCheckAllTodo.checked = true;
   } else {
-    elements.inputCheckAllTodo().checked = false;
+    elements.inputCheckAllTodo.checked = false;
   }
 };
 
@@ -108,12 +108,12 @@ const renderEachTodo = (todos, filter, elements) => {
 
   filteredTodos.forEach((todo) => {
     const todoElement = createTodoElement(todo);
-    elements.todosList().append(todoElement);
+    elements.todosList.append(todoElement);
   });
 };
 
 const renderFilterView = (filter, elements) => {
-  elements.filterButtons().forEach((button) => {
+  elements.filterButtons.forEach((button) => {
     if (button.name === filter) {
       button.classList.add('button-filter--selected');
     } else {
@@ -123,7 +123,7 @@ const renderFilterView = (filter, elements) => {
 };
 
 const renderTodos = (todos, elements) => {
-  elements.todosList().innerHTML = '';
+  elements.todosList.innerHTML = '';
 
   renderAppearingElements(todos.items, elements);
   renderInputCheckAllTodo(todos.items, elements);
