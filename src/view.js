@@ -1,69 +1,67 @@
 const createTodoCheckElement = (todo) => {
-  const inputCheckElement = document.createElement('input');
-  inputCheckElement.classList.add('visually-hidden', 'todo__input-check');
-  inputCheckElement.type = 'checkbox';
-  inputCheckElement.setAttribute('id', String(todo.id));
+  const inputCheckTodo = document.createElement('input');
+  inputCheckTodo.classList.add('visually-hidden', 'todo__input-check');
+  inputCheckTodo.type = 'checkbox';
+  inputCheckTodo.setAttribute('id', String(todo.id));
 
   if (todo.status === 'completed') {
-    inputCheckElement.checked = true;
+    inputCheckTodo.checked = true;
   }
 
-  const labelElement = document.createElement('label');
-  labelElement.classList.add('todo__checkbox');
-  labelElement.append(inputCheckElement);
+  const todoCheckbox = document.createElement('label');
+  todoCheckbox.classList.add('todo__checkbox');
+  todoCheckbox.append(inputCheckTodo);
   const spanMarkElement = document.createElement('span');
   spanMarkElement.classList.add('todo__checkbox-mark');
-  labelElement.append(spanMarkElement);
+  todoCheckbox.append(spanMarkElement);
 
-  return labelElement;
+  return todoCheckbox;
 };
 
 const createTodoElement = (todo) => {
-  const todoCheckElement = createTodoCheckElement(todo);
+  const todoCheckbox = createTodoCheckElement(todo);
 
-  const pElement = document.createElement('p');
-  pElement.classList.add('todo__title');
-  pElement.textContent = todo.title;
+  const todoTitle = document.createElement('p');
+  todoTitle.classList.add('todo__title');
+  todoTitle.textContent = todo.title;
 
-  const buttonElement = document.createElement('button');
-  buttonElement.classList.add('todo__button-delete');
-  buttonElement.setAttribute('type', 'button');
-  buttonElement.dataset.id = todo.id;
+  const buttonDeleteTodo = document.createElement('button');
+  buttonDeleteTodo.classList.add('todo__button-delete');
+  buttonDeleteTodo.setAttribute('type', 'button');
+  buttonDeleteTodo.dataset.id = todo.id;
 
-  const divElement = document.createElement('div');
-  divElement.classList.add('todo__container');
+  const todoContainer = document.createElement('div');
+  todoContainer.classList.add('todo__container');
 
-  divElement.append(todoCheckElement);
-  divElement.append(pElement);
-  divElement.append(buttonElement);
+  todoContainer.append(todoCheckbox);
+  todoContainer.append(todoTitle);
+  todoContainer.append(buttonDeleteTodo);
 
-  const liElement = document.createElement('li');
-  liElement.classList.add('todos__item', 'todo');
-  liElement.dataset.id = String(todo.id);
-  liElement.append(divElement);
+  const todoItem = document.createElement('li');
+  todoItem.classList.add('todos__item', 'todo');
+  todoItem.dataset.id = String(todo.id);
+  todoItem.append(todoContainer);
 
   if (todo.status === 'completed') {
-    liElement.classList.add('todo--completed');
+    todoItem.classList.add('todo--completed');
   }
 
-  return liElement;
+  return todoItem;
 };
 
 const renderTodoCounter = (todos, elements) => {
-  const spanElement = elements.spanTodoInfo();
-  spanElement.innerHTML = '';
-  const activeTodosCount = todos.filter(
-    (todo) => todo.status === 'active'
-  ).length;
-  const strongElement = document.createElement('strong');
-  strongElement.classList.add('todo-header__count');
-  strongElement.textContent = activeTodosCount;
-  spanElement.append(strongElement);
+  const todosCounterInfo = elements.spanTodoInfo();
+  todosCounterInfo.innerHTML = '';
+  const activeTodosCount = todos.filter((todo) => todo.status === 'active').length;
+  const todosCountElement = document.createElement('strong');
+  todosCountElement.classList.add('todo-header__count');
+  todosCountElement.textContent = activeTodosCount;
+  todosCounterInfo.append(todosCountElement);
 
   if (activeTodosCount === 1) {
-    spanElement.append(' item left');
+    todosCounterInfo.append(' item left');
   } else {
-    spanElement.append(' items left');
+    todosCounterInfo.append(' items left');
   }
 };
 
@@ -86,7 +84,7 @@ const renderAppearingElements = (todos, elements) => {
   }
 };
 
-const renderInputCheckAllTodo = (todos, elements) => {
+const renderCheckAllTodo = (todos, elements) => {
   const hasActiveTodo = todos.find((todo) => todo.status === 'active');
 
   if (!hasActiveTodo) {
@@ -103,7 +101,7 @@ const filterTodos = (todos, filter) => {
   return todos.filter((todo) => todo.status === filter);
 };
 
-const renderEachTodo = (todos, filter, elements) => {
+const renderFilterdTodoItems = (todos, filter, elements) => {
   const filteredTodos = filterTodos(todos, filter);
 
   filteredTodos.forEach((todo) => {
@@ -126,8 +124,8 @@ const renderTodos = (todos, elements) => {
   elements.todosList.innerHTML = '';
 
   renderAppearingElements(todos.items, elements);
-  renderInputCheckAllTodo(todos.items, elements);
-  renderEachTodo(todos.items, todos.filter, elements);
+  renderCheckAllTodo(todos.items, elements);
+  renderFilterdTodoItems(todos.items, todos.filter, elements);
   renderFilterView(todos.filter, elements);
   renderTodoCounter(todos.items, elements);
 };
@@ -139,14 +137,14 @@ export const renderEditedTodo = (editedTodoId, elements) => {
     return;
   }
 
-  const inputElement = document.createElement('input');
-  inputElement.classList.add('todo__input-editing');
-  inputElement.setAttribute('type', 'text');
-  const liElement = document.querySelector(`.todo[data-id="${editedTodoId}"]`);
-  inputElement.value = liElement.textContent;
-  liElement.append(inputElement);
-  liElement.classList.add('todo--editing');
-  inputElement.focus();
+  const editedTodoInput = document.createElement('input');
+  editedTodoInput.classList.add('todo__input-editing');
+  editedTodoInput.setAttribute('type', 'text');
+  const currentTodoItem = document.querySelector(`.todo[data-id="${editedTodoId}"]`);
+  editedTodoInput.value = currentTodoItem.textContent;
+  currentTodoItem.append(editedTodoInput);
+  currentTodoItem.classList.add('todo--editing');
+  editedTodoInput.focus();
 };
 
 export default renderTodos;
