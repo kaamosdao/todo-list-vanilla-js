@@ -3,12 +3,13 @@ import getId from './utils/getId.js';
 export default (model, elements, localStorageHandler) => {
   elements.inputAddTodo.addEventListener('keyup', (event) => {
     event.preventDefault();
+    const todoTitle = event.target.value.trim();
     if (event.keyCode === 13) {
-      if (!event.target.value) {
+      if (!todoTitle) {
         return;
       }
       const newTodo = {
-        title: event.target.value,
+        title: todoTitle,
         status: 'active',
         id: getId(),
       };
@@ -23,14 +24,15 @@ export default (model, elements, localStorageHandler) => {
   });
 
   document.addEventListener('click', (event) => {
+    const todoTitle = elements.inputAddTodo.value.trim();
     if (event.target.classList.contains('input-add-todo')) {
       return;
     }
-    if (!elements.inputAddTodo.value) {
+    if (!todoTitle) {
       return;
     }
     const newTodo = {
-      title: elements.inputAddTodo.value,
+      title: todoTitle,
       status: 'active',
       id: getId(),
     };
@@ -125,7 +127,8 @@ export default (model, elements, localStorageHandler) => {
       const { id } = event.target.closest('.todo').dataset;
       const newTodos = model.todos.items.reduce((acc, todo) => {
         if (todo.id === Number(id)) {
-          const newTodo = { ...todo, title: event.target.value };
+          const todoTitle = event.target.value.trim();
+          const newTodo = { ...todo, title: todoTitle };
           acc.push(newTodo);
         } else {
           acc.push(todo);
